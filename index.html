@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Para Elaine 💖</title>
+<title>Elaine 💖</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -11,49 +11,57 @@
 body{
   height:100vh;
   overflow:hidden;
-  font-family: Arial, sans-serif;
+  background:black;
+  font-family:Arial, sans-serif;
   display:flex;
   justify-content:center;
   align-items:center;
-  background:black;
   color:white;
 }
 
-/* Fondo galaxia corazón */
-.background{
+/* Fondo estrellas */
+body::before{
+  content:"";
   position:absolute;
-  width:110%;
-  height:110%;
-  background:url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=1974&auto=format&fit=crop');
-  background-size:cover;
-  background-position:center;
-  animation: zoom 40s infinite alternate ease-in-out;
-  filter:brightness(0.8);
+  width:200%;
+  height:200%;
+  background:radial-gradient(white 1px, transparent 1px);
+  background-size:3px 3px;
+  animation:starsMove 60s linear infinite;
+  opacity:0.3;
 }
 
-@keyframes zoom{
-  from{transform:scale(1);}
-  to{transform:scale(1.2);}
+@keyframes starsMove{
+  from{transform:translateY(0);}
+  to{transform:translateY(-500px);}
 }
 
-/* Capa oscura romántica */
-.overlay{
+/* Galaxia corazón girando */
+.galaxy{
   position:absolute;
-  width:100%;
-  height:100%;
-  background:radial-gradient(circle, rgba(255,0,100,0.3), rgba(0,0,0,0.8));
+  width:70vmin;
+  height:70vmin;
+  background:url("galaxia.jpg.JPG") center/cover no-repeat;
+  border-radius:50%;
+  animation:rotate 40s linear infinite;
+  filter:drop-shadow(0 0 30px #ff4d6d);
+}
+
+@keyframes rotate{
+  from{transform:rotate(0deg);}
+  to{transform:rotate(360deg);}
 }
 
 /* Nombre central */
 .center{
-  position:relative;
+  position:absolute;
   text-align:center;
   z-index:5;
 }
 
 .center h1{
-  font-size:3.5rem;
-  text-shadow:0 0 20px #ff4d6d, 0 0 40px #ff99ac, 0 0 80px #ff4d6d;
+  font-size:3rem;
+  text-shadow:0 0 20px #ff4d6d,0 0 40px #ff99ac,0 0 60px #ff4d6d;
   animation:pulse 2s infinite alternate;
 }
 
@@ -62,13 +70,17 @@ body{
   to{transform:scale(1.1);}
 }
 
+.center p{
+  margin-top:10px;
+  font-size:1.2rem;
+}
+
 /* Te quiero flotando */
 .love{
   position:absolute;
-  font-size:20px;
   color:#ffb3c6;
-  animation: float 10s linear infinite;
-  opacity:0.8;
+  font-size:18px;
+  animation:float 10s linear infinite;
 }
 
 @keyframes float{
@@ -88,12 +100,11 @@ body{
 
 <body>
 
-<div class="background"></div>
-<div class="overlay"></div>
+<div class="galaxy"></div>
 
 <div class="center">
   <h1>Elaine 💖</h1>
-  <p>Te quiero infinito ✨</p>
+  <p>Te quiero hasta el infinito ✨</p>
 </div>
 
 <div class="tap">Toca la pantalla para escuchar 🎵</div>
@@ -103,14 +114,13 @@ body{
 </audio>
 
 <script>
-
 /* Música */
 const music=document.getElementById("music");
 document.body.addEventListener("click",()=>{
   music.play();
 },{once:true});
 
-/* Muchos Te quiero */
+/* Crear muchos Te quiero */
 function createLove(){
   const love=document.createElement("div");
   love.classList.add("love");
@@ -120,8 +130,7 @@ function createLove(){
   document.body.appendChild(love);
   setTimeout(()=>love.remove(),10000);
 }
-setInterval(createLove,500);
-
+setInterval(createLove,400);
 </script>
 
 </body>
