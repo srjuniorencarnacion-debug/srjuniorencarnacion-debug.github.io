@@ -11,7 +11,7 @@
 body{
   height:100vh;
   overflow:hidden;
-  font-family: 'Arial', sans-serif;
+  font-family: Arial, sans-serif;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -19,70 +19,56 @@ body{
   color:white;
 }
 
-/* GALAXIA GIRANDO */
-.galaxy{
+/* Fondo galaxia corazón */
+.background{
   position:absolute;
-  width:200%;
-  height:200%;
-  background:
-    radial-gradient(2px 2px at 20% 30%, white, transparent),
-    radial-gradient(1.5px 1.5px at 70% 60%, white, transparent),
-    radial-gradient(2px 2px at 40% 80%, white, transparent),
-    radial-gradient(1px 1px at 90% 20%, white, transparent),
-    radial-gradient(1.5px 1.5px at 10% 70%, white, transparent);
-  animation: rotateGalaxy 120s linear infinite;
-  opacity:0.6;
+  width:110%;
+  height:110%;
+  background:url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=1974&auto=format&fit=crop');
+  background-size:cover;
+  background-position:center;
+  animation: zoom 40s infinite alternate ease-in-out;
+  filter:brightness(0.8);
 }
 
-@keyframes rotateGalaxy{
-  from{transform:rotate(0deg);}
-  to{transform:rotate(360deg);}
+@keyframes zoom{
+  from{transform:scale(1);}
+  to{transform:scale(1.2);}
 }
 
-/* Bruma romántica */
-.glow{
+/* Capa oscura romántica */
+.overlay{
   position:absolute;
   width:100%;
   height:100%;
-  background: radial-gradient(circle, rgba(255,0,100,0.2), transparent 70%);
-  animation: pulseGlow 4s infinite alternate;
+  background:radial-gradient(circle, rgba(255,0,100,0.3), rgba(0,0,0,0.8));
 }
 
-@keyframes pulseGlow{
-  from{opacity:0.4;}
-  to{opacity:0.8;}
-}
-
-/* TEXTO CENTRAL */
+/* Nombre central */
 .center{
   position:relative;
   text-align:center;
-  z-index:10;
+  z-index:5;
 }
 
 .center h1{
-  font-size:3rem;
-  text-shadow:0 0 20px #ff4d6d, 0 0 40px #ff99ac;
-  animation: pulseText 2s infinite alternate;
+  font-size:3.5rem;
+  text-shadow:0 0 20px #ff4d6d, 0 0 40px #ff99ac, 0 0 80px #ff4d6d;
+  animation:pulse 2s infinite alternate;
 }
 
-@keyframes pulseText{
+@keyframes pulse{
   from{transform:scale(1);}
   to{transform:scale(1.1);}
 }
 
-.center p{
-  margin-top:15px;
-  font-size:1.2rem;
-  opacity:0.9;
-}
-
-/* CORAZONES */
-.heart{
+/* Te quiero flotando */
+.love{
   position:absolute;
-  color:#ff4d6d;
   font-size:20px;
-  animation: float 6s linear infinite;
+  color:#ffb3c6;
+  animation: float 10s linear infinite;
+  opacity:0.8;
 }
 
 @keyframes float{
@@ -102,13 +88,12 @@ body{
 
 <body>
 
-<div class="galaxy"></div>
-<div class="glow"></div>
+<div class="background"></div>
+<div class="overlay"></div>
 
 <div class="center">
   <h1>Elaine 💖</h1>
-  <p>En este universo infinito...</p>
-  <p>tú eres mi estrella favorita ✨</p>
+  <p>Te quiero infinito ✨</p>
 </div>
 
 <div class="tap">Toca la pantalla para escuchar 🎵</div>
@@ -118,23 +103,25 @@ body{
 </audio>
 
 <script>
-/* Corazones flotando */
-function createHeart(){
-  const heart=document.createElement("div");
-  heart.classList.add("heart");
-  heart.innerHTML="💖";
-  heart.style.left=Math.random()*100+"vw";
-  heart.style.animationDuration=(Math.random()*3+4)+"s";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),7000);
-}
-setInterval(createHeart,500);
 
-/* Música al tocar */
+/* Música */
 const music=document.getElementById("music");
 document.body.addEventListener("click",()=>{
   music.play();
 },{once:true});
+
+/* Muchos Te quiero */
+function createLove(){
+  const love=document.createElement("div");
+  love.classList.add("love");
+  love.innerHTML="Te quiero 💖";
+  love.style.left=Math.random()*100+"vw";
+  love.style.animationDuration=(Math.random()*5+5)+"s";
+  document.body.appendChild(love);
+  setTimeout(()=>love.remove(),10000);
+}
+setInterval(createLove,500);
+
 </script>
 
 </body>
